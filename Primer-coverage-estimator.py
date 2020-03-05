@@ -4,20 +4,21 @@ Created on Mon Aug  5 19:51:23 2019
 
 @author: Junyu
 """
-import os
+import os,sys
 import pandas as pd
 from Bio import SeqIO   
-Arc = "~/Lab/23S-rRNA/Rawdata/Archaea.fasta"
+
+DBdir = sys.argv[1] #your SILVA database dir
+Primer = sys.argv[2] #your primer file as fasta format Primer = "~/Lab/23S-rRNA/Rawdata/Primer.fasta"
+
+Arc = DBdir+"/Archaea.fasta"
 Bac = "~/Lab/23S-rRNA/Rawdata/Bacteria.fasta"
 Euk = "~/Lab/23S-rRNA/Rawdata/Eukaryota.fasta"
 Fa = "~/Lab/23S-rRNA/Rawdata/SILVA_132_LSURef.fasta"
-Full_ID = "~/Lab/23S-rRNA/Rawdata/SILVA_132_LSURef_full_ID.txt"
-Taxa = "~/Lab/23S-rRNA/Rawdata/SILVA_132_LSURef.tax"
-
-Primer = "~/Lab/23S-rRNA/Rawdata/Primer.fasta"
+#Full_ID = "~/Lab/23S-rRNA/Rawdata/SILVA_132_LSURef_full_ID.txt"
+#Taxa = "~/Lab/23S-rRNA/Rawdata/SILVA_132_LSURef.tax"
 
 
-Primer = "/home/junyuchen/Lab/23S-rRNA/Rawdata/Primer.fasta"
 for Seq in SeqIO.parse(Primer,"fasta"):
     analyze_primers1 = "analyze_primers.py -f "+str(Arc)+" -p "+str(Seq.id)+" -s "+str(Seq.seq)
     analyze_primers2 = "analyze_primers.py -f "+str(Bac)+" -p "+str(Seq.id)+" -s "+str(Seq.seq)
